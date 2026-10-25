@@ -54,7 +54,7 @@ export default function HomePage() {
           ))}
         </div>
         <p className="text-amber-400/30 text-sm">Made with 🪔 for the most chaotic Diwali party ever</p>
-        <p className="text-white/20 text-xs mt-1">9th November • 7 PM Onwards</p>
+        <p className="text-white/20 text-xs mt-1">9th November • 7 PM Onwards • Dress Code: Traditionals</p>
       </footer>
 
       {/* Music */}

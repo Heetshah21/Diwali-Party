@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   keywords: ['Diwali', 'party', 'invitation', 'house party', '2024'],
   openGraph: {
     title: '🪔 Diwali House Party — You\'re Invited!',
-    description: '"Lights. Food. Games. Chaos. Repeat." — 9th November, 7 PM Onwards',
+    description: '"Lights. Food. Games. Chaos. Repeat." — 9th November, 7 PM Onwards • Dress Code: Traditionals',
     type: 'website',
   },
 };

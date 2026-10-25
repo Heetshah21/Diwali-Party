@@ -101,29 +101,34 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-2xl px-2"
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 justify-center items-stretch w-full max-w-4xl px-2"
         >
-          <div className="party-detail-card flex-1 w-full sm:w-auto justify-center group">
+          <div className="party-detail-card justify-center group">
             <div className="detail-icon">📅</div>
             <div className="text-left">
               <p className="detail-label">Date</p>
-              <p className="detail-value">9th November</p>
+              <p className="detail-value text-sm sm:text-base">9th November</p>
             </div>
           </div>
-          <div className="detail-divider hidden sm:block" />
-          <div className="party-detail-card flex-1 w-full sm:w-auto justify-center group">
+          <div className="party-detail-card justify-center group">
             <div className="detail-icon">⏰</div>
             <div className="text-left">
               <p className="detail-label">Time</p>
-              <p className="detail-value">7 PM Onwards</p>
+              <p className="detail-value text-sm sm:text-base">7 PM Onwards</p>
             </div>
           </div>
-          <div className="detail-divider hidden sm:block" />
-          <div className="party-detail-card flex-1 w-full sm:w-auto justify-center group">
+          <div className="party-detail-card justify-center group">
             <div className="detail-icon">📍</div>
             <div className="text-left">
               <p className="detail-label">Location</p>
-              <p className="detail-value text-amber-400/80 italic text-sm">Coming Soon...</p>
+              <p className="detail-value text-amber-400/80 italic text-xs sm:text-sm">Coming Soon...</p>
+            </div>
+          </div>
+          <div className="party-detail-card justify-center group">
+            <div className="detail-icon">🥻</div>
+            <div className="text-left">
+              <p className="detail-label">Dress Code</p>
+              <p className="detail-value text-sm sm:text-base text-amber-300">Traditionals</p>
             </div>
           </div>
         </motion.div>
