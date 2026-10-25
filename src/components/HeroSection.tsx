@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Diya from './Diya';
 
@@ -7,6 +8,8 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onCTAClick }: HeroSectionProps) {
+  const [showLocationModal, setShowLocationModal] = useState(false);
+  const [copied, setCopied] = useState(false);
   return (
     <section
       id="hero"
@@ -117,11 +120,20 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
               <p className="detail-value text-sm sm:text-base">7 PM Onwards</p>
             </div>
           </div>
-          <div className="party-detail-card justify-center group">
+          <div
+            onClick={() => setShowLocationModal(true)}
+            className="party-detail-card justify-center group cursor-pointer hover:border-amber-400/60 hover:bg-amber-500/10 transition-all duration-300 relative"
+            title="Click to view full address"
+          >
             <div className="detail-icon">📍</div>
             <div className="text-left">
-              <p className="detail-label">Location</p>
-              <p className="detail-value text-amber-400/80 italic text-xs sm:text-sm">Coming Soon...</p>
+              <div className="flex items-center gap-1">
+                <p className="detail-label">Location</p>
+                <span className="text-[10px] text-amber-400/60 group-hover:text-amber-300 transition-colors">↗</span>
+              </div>
+              <p className="detail-value text-sm sm:text-base text-amber-300 font-bold group-hover:underline decoration-amber-400/50 underline-offset-2">
+                Heet&apos;s Home
+              </p>
             </div>
           </div>
           <div className="party-detail-card justify-center group">
@@ -158,6 +170,79 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
           </p>
         </motion.div>
       </div>
+
+      {/* Location Modal with blurred background */}
+      <AnimatePresence>
+        {showLocationModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
+            onClick={() => setShowLocationModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card relative max-w-md w-full p-6 sm:p-8 rounded-3xl border border-amber-400/30 text-center shadow-2xl shadow-amber-500/20"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setShowLocationModal(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center transition-all cursor-pointer text-sm"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+
+              {/* Icon */}
+              <div className="text-4xl mb-3">📍</div>
+
+              <h3 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
+                Party Destination
+              </h3>
+              <p className="text-amber-400/70 text-xs uppercase tracking-widest font-semibold mb-5">
+                Heet&apos;s Home
+              </p>
+
+              {/* Full Address Box */}
+              <div className="p-4 rounded-2xl bg-white/5 border border-amber-400/20 text-left mb-6">
+                <p className="text-xs text-amber-400/60 uppercase font-semibold mb-1">Full Address</p>
+                <p className="text-amber-100/90 text-sm sm:text-base leading-relaxed font-medium">
+                  101, Neel Pushpa Ashish Complex, Temba Road, Opp. Maxus Mall, Bhayander West
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText('101, Neel Pushpa Ashish Complex, Temba Road, Opp. Maxus Mall, Bhayander West');
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="flex-1 py-3 px-4 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 text-sm font-semibold transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  {copied ? '✓ Copied Address' : '📋 Copy Address'}
+                </button>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Neel+Pushpa+Ashish+Complex+Temba+Road+Opp+Maxus+Mall+Bhayander+West"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+                >
+                  🗺️ Google Maps
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
